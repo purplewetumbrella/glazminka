@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="145dp"
+            android:layout_height="60dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="131dp"
+            android:layout_marginTop="113dp"
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="30dp" />
+
+        <Button
+            android:id="@+id/btnInfoAct"
+            android:layout_width="272dp"
+            android:layout_height="75dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="420dp"
+            android:text="прошлые выполнения"
+            android:textSize="17sp" />
+
+        <Button
+            android:id="@+id/btnGoToSecAct"
+            android:layout_width="272dp"
+            android:layout_height="126dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="500dp"
+            android:text="Начать"
+            android:textSize="24sp" />
+
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
