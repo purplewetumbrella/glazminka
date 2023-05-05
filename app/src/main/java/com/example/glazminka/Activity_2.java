@@ -171,8 +171,8 @@ public class Activity_2 extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        imageView.startAnimation(upAnimation);
-                       /* imageView.startAnimation(leftAnimation);
+                      /*  imageView.startAnimation(upAnimation);
+                        imageView.startAnimation(leftAnimation);
                         imageView.startAnimation(downAnimation);
                         imageView.startAnimation(rightAnimation);
                         imageView.startAnimation(upAnimation);
@@ -185,7 +185,7 @@ public class Activity_2 extends AppCompatActivity {
                 new CountDownTimer(20000, 1000) {
                     @Override
                     public void onTick(long millisUntilFinished) {
-                        // Do nothing
+
                     }
 
                     @Override
