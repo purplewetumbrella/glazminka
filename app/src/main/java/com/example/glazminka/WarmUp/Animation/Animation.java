@@ -4,7 +4,7 @@ import android.view.animation.AnimationSet;
 import android.view.animation.TranslateAnimation;
 
 public class Animation {
-    TranslateAnimation upDownAnimation = new TranslateAnimation(
+  /*  TranslateAnimation upDownAnimation = new TranslateAnimation(
             android.view.animation.Animation.RELATIVE_TO_SELF, 0f,
             android.view.animation.Animation.RELATIVE_TO_SELF, 0f,
             android.view.animation.Animation.RELATIVE_TO_SELF, 0f,
@@ -68,5 +68,5 @@ public class Animation {
         animationSquare.addAnimation(upAnimation);
         animationSquare.addAnimation(rightAnimation);
         animationSquare.addAnimation(downAnimation);
-        animationSquare.addAnimation(leftAnimation);
+        animationSquare.addAnimation(leftAnimation);*/
 }

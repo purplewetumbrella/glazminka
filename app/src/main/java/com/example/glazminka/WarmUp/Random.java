@@ -10,7 +10,7 @@ public class Random extends AppCompatActivity {
 
 
 
-    int random2 = getIntent().getIntExtra("random", 1);
+   /* int random2 = getIntent().getIntExtra("random", 1);
 
         switch (random2) {
         case 1:
@@ -37,7 +37,7 @@ public class Random extends AppCompatActivity {
             //replacing text
 
             break;
-    }
+    }*/
 
 
 
