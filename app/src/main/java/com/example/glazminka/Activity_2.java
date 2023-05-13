@@ -9,7 +9,9 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -18,9 +20,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Random;
+
 public class Activity_2 extends AppCompatActivity {
     private MainActivity mainActivity;
-    // изачально писала в одной активности, неуспела переписать в для разныч классов
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,9 @@ public class Activity_2 extends AppCompatActivity {
             }
         };
         btnGoToActivity.setOnClickListener(oclBtnGoToActivity);
+
+
+
         TranslateAnimation upDownAnimation = new TranslateAnimation(
                 Animation.RELATIVE_TO_SELF, 0f,
                 Animation.RELATIVE_TO_SELF, 0f,
@@ -60,6 +67,7 @@ public class Activity_2 extends AppCompatActivity {
         diagonalAnimation1.setDuration(2000);
         diagonalAnimation1.setRepeatCount(Animation.INFINITE);
         diagonalAnimation1.setRepeatMode(Animation.REVERSE);
+
         TranslateAnimation diagonalAnimation2 = new TranslateAnimation(
                 Animation.RELATIVE_TO_SELF, 0f,
                 Animation.RELATIVE_TO_SELF, -3.7f,
@@ -68,30 +76,44 @@ public class Activity_2 extends AppCompatActivity {
         diagonalAnimation2.setDuration(2000);
         diagonalAnimation2.setRepeatCount(Animation.INFINITE);
         diagonalAnimation2.setRepeatMode(Animation.REVERSE);
+
         TranslateAnimation upAnimation = new TranslateAnimation(
                 Animation.RELATIVE_TO_SELF, 0f,
                 Animation.RELATIVE_TO_SELF, 0f,
                 Animation.RELATIVE_TO_SELF, 0f,
-                Animation.RELATIVE_TO_SELF, -3.7f);
-        upDownAnimation.setDuration(3000);
-        TranslateAnimation downAnimation = new TranslateAnimation(
-                Animation.RELATIVE_TO_SELF, 0f,
-                Animation.RELATIVE_TO_SELF, 0f,
-                Animation.RELATIVE_TO_SELF, 0f,
-                Animation.RELATIVE_TO_SELF, 3.7f);
-        upDownAnimation.setDuration(3000);
-        TranslateAnimation leftAnimation = new TranslateAnimation(
-                Animation.RELATIVE_TO_SELF, 0f,
-                Animation.RELATIVE_TO_SELF, -3.7f,
-                Animation.RELATIVE_TO_SELF, 0f,
-                Animation.RELATIVE_TO_SELF, 0f);
-        upDownAnimation.setDuration(3000);
+                Animation.RELATIVE_TO_SELF, -3.7f
+        );
+        upAnimation.setDuration(3000);
+
         TranslateAnimation rightAnimation = new TranslateAnimation(
                 Animation.RELATIVE_TO_SELF, 0f,
                 Animation.RELATIVE_TO_SELF, 3.7f,
                 Animation.RELATIVE_TO_SELF, 0f,
-                Animation.RELATIVE_TO_SELF, 0f);
-        upDownAnimation.setDuration(3000);
+                Animation.RELATIVE_TO_SELF, 0f
+        );
+        rightAnimation.setDuration(3000);
+
+        TranslateAnimation downAnimation = new TranslateAnimation(
+                Animation.RELATIVE_TO_SELF, 0f,
+                Animation.RELATIVE_TO_SELF, 0f,
+                Animation.RELATIVE_TO_SELF, 0f,
+                Animation.RELATIVE_TO_SELF, 3.7f
+        );
+        downAnimation.setDuration(3000);
+
+        TranslateAnimation leftAnimation = new TranslateAnimation(
+                Animation.RELATIVE_TO_SELF, 0f,
+                Animation.RELATIVE_TO_SELF, -3.7f,
+                Animation.RELATIVE_TO_SELF, 0f,
+                Animation.RELATIVE_TO_SELF, 0f
+        );
+        leftAnimation.setDuration(3000);
+
+        AnimationSet animationSet = new AnimationSet(true);
+        animationSet.addAnimation(upAnimation);
+        animationSet.addAnimation(rightAnimation);
+        animationSet.addAnimation(downAnimation);
+        animationSet.addAnimation(leftAnimation);
 
 
         number_1.setOnClickListener(new View.OnClickListener() {
@@ -110,7 +132,7 @@ public class Activity_2 extends AppCompatActivity {
                 new CountDownTimer(8000, 1000) {
                     @Override
                     public void onTick(long millisUntilFinished) {
-                        // Do nothing
+
                     }
 
                     @Override
@@ -118,12 +140,19 @@ public class Activity_2 extends AppCompatActivity {
                         imageView.clearAnimation();
                     }
                 }.start();
-          }
+            }
         });
         number_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                textView.setText("Рисуем глазами диагонали. " +
+
+               /* int random = new Random().nextInt(4) + 1;
+                Intent intent = new Intent(Activity_2.this, Random.class);
+                intent.putExtra("random", random);
+                startActivity(intent);*/
+
+
+              /*  textView.setText("Рисуем глазами диагонали. " +
                         "Взгляд поднимем в верхний праву угол, перемещаем в нижний левый угол, поднимем вверх и спускаемся в правый нижний угол");
                 FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) imageView.getLayoutParams();
                 layoutParams.gravity = Gravity.BOTTOM | Gravity.LEFT;
@@ -160,64 +189,33 @@ public class Activity_2 extends AppCompatActivity {
                             }
                         }.start();
                     }
-                }.start();
+                }.start();*/
             }
         });
         number_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 textView.setText("Нарисуем глазами квадрат.  " +
-                        "Смотрим вниз в правый угол, поднимаем глаза, затем переносим взгляд в левый верхний угол, вниз, возвращаемся в исходную точку. Повторим. вниз вправо, наверх, влево, вниз, вправо. и в другую сторону");
+                        "Смотрим вниз в правый угол, поднимаем глаза, затем переносим взгляд в левый верхний угол," +
+                        " вниз, возвращаемся в исходную точку. Повторим. вниз вправо, наверх, влево, вниз, вправо. и в другую сторону");
+                FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) imageView.getLayoutParams();
+                layoutParams.gravity = Gravity.BOTTOM | Gravity.LEFT;
+                imageView.setLayoutParams(layoutParams);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                      /*  imageView.startAnimation(upAnimation);
-                        imageView.startAnimation(leftAnimation);
-                        imageView.startAnimation(downAnimation);
-                        imageView.startAnimation(rightAnimation);
-                        imageView.startAnimation(upAnimation);
-                        imageView.startAnimation(leftAnimation);
-                        imageView.startAnimation(downAnimation);
-                        imageView.startAnimation(rightAnimation);*/
+                        imageView.startAnimation(diagonalAnimation1);
                     }
                 }, 1000);
 
-                new CountDownTimer(20000, 1000) {
+                new CountDownTimer(10000, 1000) {
                     @Override
-                    public void onTick(long millisUntilFinished) {
-
-                    }
+                    public void onTick(long l) {}
 
                     @Override
-                    public void onFinish() {
-                        imageView.clearAnimation();
-                    }
+                    public void onFinish() { }
                 }.start();
-            }
-        });
-        number_4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                textView.setText("Рисуем глазами бантики. " +
-                        "Начиная от правого верхнего угла опускаем глаза вниз, по диагонали поднимем взгляд в верхний левый угол, опускаем и возвращаемся на исходную точку");
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        imageView.startAnimation(upDownAnimation);
-                    }
-                }, 2000);
-
-                new CountDownTimer(8000, 1000) {
-                    @Override
-                    public void onTick(long millisUntilFinished) {
-                    }
-
-                    @Override
-                    public void onFinish() {
-                        imageView.clearAnimation();
-                    }
-                }.start();
             }
         });
 
