@@ -109,11 +109,11 @@ public class Activity_2 extends AppCompatActivity {
         );
         leftAnimation.setDuration(3000);
 
-        AnimationSet animationSet = new AnimationSet(true);
-        animationSet.addAnimation(upAnimation);
-        animationSet.addAnimation(rightAnimation);
-        animationSet.addAnimation(downAnimation);
-        animationSet.addAnimation(leftAnimation);
+        AnimationSet animationSquare = new AnimationSet(true);
+        animationSquare.addAnimation(upAnimation);
+        animationSquare.addAnimation(rightAnimation);
+        animationSquare.addAnimation(downAnimation);
+        animationSquare.addAnimation(leftAnimation);
 
 
         number_1.setOnClickListener(new View.OnClickListener() {
