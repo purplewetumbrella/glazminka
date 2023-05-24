@@ -29,14 +29,7 @@
             android:textSize="50dp"
             android:textStyle="bold" />
 
-<!-- <Button
-            android:id="@+id/btnInfoAct"
-            android:layout_width="272dp"
-            android:layout_height="75dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="420dp"
-            android:text="прошлые выполнения"
-            android:textSize="17sp" /> -->
+
 
         <Button
             android:id="@+id/btnGoToSecAct"
