@@ -1,17 +1,12 @@
 package com.example.glazminka;
 
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -27,10 +22,16 @@ public class Activity_2 extends AppCompatActivity {
     private MainActivity mainActivity;
     boolean isImageVisible = false;
     boolean isImageChanged = false;
-    private MediaPlayer mediaPlayer1;
-    private MediaPlayer mediaPlayer2;
-    private boolean music1Playing;
-    private boolean music2Playing;
+    private MediaPlayer Krestie;
+    private MediaPlayer Cross;
+    private MediaPlayer Square;
+    private MediaPlayer Knot;
+    private MediaPlayer Clock;
+    private boolean musicSquare;
+    private boolean musicKresting;
+    private boolean musicCross;
+    private boolean musicKnot;
+    private  boolean musicClock;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,8 +39,11 @@ public class Activity_2 extends AppCompatActivity {
         ImageView imageView = findViewById(R.id.imageView);
         ImageView sound = findViewById(R.id.sound_1);
 
-        mediaPlayer1 = MediaPlayer.create(this, R.raw.https___apihost_ru_storage_temp_is_free_extra_64630564372e3570391246);
-        mediaPlayer2 = MediaPlayer.create(this, R.raw.https___apihost_ru_storage_temp_is_free_extra_646303ecb9a8e979882376);
+        Krestie = MediaPlayer.create(this, R.raw.krestie);
+        Cross = MediaPlayer.create(this, R.raw.cross3);
+        Square = MediaPlayer.create(this, R.raw.square);
+        Clock = MediaPlayer.create(this, R.raw.sandclock2);
+        Knot =  MediaPlayer.create(this, R.raw.knot2);
 
 
         Button btnGoToActivity = (Button) findViewById(R.id.btnGoToActivity);
@@ -50,8 +54,12 @@ public class Activity_2 extends AppCompatActivity {
         TextView textView = findViewById(R.id.exercise_text);
         ImageButton text = (ImageButton) findViewById(R.id.text);
 
-        music1Playing = false;
-        music2Playing = false;
+        musicKresting = false;
+        musicCross = false;
+        musicSquare = false;
+        musicKnot = false;
+        musicClock = false;
+
 
 
         View.OnClickListener oclBtnGoToActivity = new View.OnClickListener() {
@@ -67,14 +75,20 @@ public class Activity_2 extends AppCompatActivity {
             public void onClick(View v) {
                 if (!isImageVisible) {
                     sound.setImageResource(R.drawable.sound_1);
-                    mediaPlayer1.setVolume(1, 1);
-                    mediaPlayer2.setVolume(1, 1);
+                    Krestie.setVolume(1, 1);
+                    Cross.setVolume(1, 1);
+                    Square.setVolume(1, 1);
+                    Knot.setVolume(1, 1);
+                    Clock.setVolume(1, 1);
 
                 } else {
                     sound.setImageResource(R.drawable.sound_2);
-                    mediaPlayer1.setVolume(0, 0);
-                    mediaPlayer2.setVolume(0, 0);
-                }
+                    Krestie.setVolume(0, 0);
+                    Cross.setVolume(0, 0);
+                    Square.setVolume(0, 0);
+                    Knot.setVolume(0, 0);
+                    Clock.setVolume(0, 0);
+                    }
                 isImageVisible = !isImageVisible;
 
             }
@@ -174,15 +188,17 @@ public class Activity_2 extends AppCompatActivity {
                 Animation.RELATIVE_TO_SELF, 3.7f);
         diagonalAnimationRigh.setDuration(2000);
         diagonalAnimationRigh.setFillAfter(true);
+        TranslateAnimation diagonalAnimationUpRigh = new TranslateAnimation(
+                Animation.RELATIVE_TO_SELF, 0f,
+                Animation.RELATIVE_TO_SELF, 3.7f,
+                Animation.RELATIVE_TO_SELF, 0f,
+                Animation.RELATIVE_TO_SELF, -3.7f);
+        diagonalAnimationRigh.setDuration(2000);
+        diagonalAnimationRigh.setFillAfter(true);
 
-        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) imageView.getLayoutParams();
 
-        private void animateImageView(ImageView imageView, int Gravity, Animation animation) {
-            FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) imageView.getLayoutParams();
-            layoutParams.gravity = Gravity;
-            imageView.setLayoutParams(layoutParams);
-            imageView.startAnimation(animation);
-        }
+
+
 
 
 
@@ -190,92 +206,46 @@ public class Activity_2 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-               Random rand = new Random();
-               int i = rand.nextInt(2) + 1;
+                Random rand = new Random();
+                int i = rand.nextInt(2) + 1;
 
                 switch (i) {
                     case (1):
                         textView.setText("Чертим ровную линию глазами. " +
-                                "Поднимем взгляд вверх, затем вниз и так несколько раз");
-                        if (!music1Playing) {
-                            playMusic1();
+                                "Поднимем взгляд вверх, затем вниз и так несколько раз. Теперь встороны Вправо, влево, вправо,влево.");
+                        if (!musicKresting) {
+                            playKresting();
                         } else {
-                            stopMusic1();
+                            stopKresting();
                         }
+                        new Handler().postDelayed(() -> animateImageView(imageView, Gravity.BOTTOM | Gravity.CENTER, upDownAnimation), 1000);
+                        new Handler().postDelayed(() -> imageView.clearAnimation(), 2000);
 
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                imageView.startAnimation(upDownAnimation);
-                            }
-                        }, 1000);
 
-                        new CountDownTimer(8000, 1000) {
-                            @Override
-                            public void onTick(long millisUntilFinished) {
-
-                            }
-
-                            @Override
-                            public void onFinish() {
-                                imageView.clearAnimation();
-                            }
-                        }.start();
                         break;
 
-                   case (2):
-                       if (!music2Playing) {
-                           playMusic2();
-                       } else {
-                           stopMusic2();
-                       }
+                    case (2):
+                        if (!musicCross) {
+                            playCross();
+                        } else {
+                            stopCross();
+                        }
 
 
-                       textView.setText("Рисуем глазами диагонали. " +
-                               "Взгляд поднимем в верхний праву угол, перемещаем в нижний левый угол, поднимем вверх и спускаемся в правый нижний угол");
-                       FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) imageView.getLayoutParams();
-                       layoutParams.gravity = Gravity.BOTTOM | Gravity.LEFT;
+                        textView.setText("Рисуем глазами диагонали. " +
+                                "Взгляд поднимем в верхний праву угол, перемещаем в нижний левый угол, поднимем вверх и спускаемся в правый нижний угол");
 
-                       imageView.setLayoutParams(layoutParams);
-                       new Handler().postDelayed(new Runnable() {
-                           @Override
-                           public void run() {
-                               imageView.startAnimation(diagonalAnimation1);
-                           }
-                       }, 1000);
+                        new Handler().postDelayed(() -> animateImageView(imageView, Gravity.BOTTOM | Gravity.LEFT, diagonalAnimation1), 1000);
+                        new Handler().postDelayed(() -> animateImageView(imageView, Gravity.BOTTOM | Gravity.RIGHT, diagonalAnimation2), 5000);
+                        new Handler().postDelayed(() -> imageView.clearAnimation(), 6000);
 
-                       new CountDownTimer(10000, 1000) {
-                           @Override
-                           public void onTick(long millisUntilFinished) {
-                           }
-
-                           @Override
-                           public void onFinish() {
-                               imageView.clearAnimation();
-                               FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) imageView.getLayoutParams();
-                               layoutParams.gravity = Gravity.BOTTOM | Gravity.RIGHT;
-                               imageView.setLayoutParams(layoutParams);
-                               imageView.startAnimation(diagonalAnimation2);
-
-                               new CountDownTimer(10000, 1000) {
-                                   @Override
-                                   public void onTick(long millisUntilFinished) {
-                                   }
-
-                                   @Override
-                                   public void onFinish() {
-                                       imageView.clearAnimation();
-                                   }
-                               }.start();
-                           }
-                       }.start();
-
-                       break;
+                        break;
 
                     default:
                         break;
 
-               }
+                }
+
             }
         });
         number_2.setOnClickListener(new View.OnClickListener() {
@@ -285,21 +255,20 @@ public class Activity_2 extends AppCompatActivity {
                 int i = rand.nextInt(2) + 1;
                 switch (i) {
                     case (1):
+                        if (!musicSquare) {
+                            playSquare();
+                        } else {
+                            stopSquare();
+                        }
                         textView.setText("Нарисуем глазами квадрат.  " +
                                 "Смотрим вниз в правый угол, поднимаем глаза, затем переносим взгляд в левый верхний угол," +
                                 " вниз, возвращаемся в исходную точку. Повторим. вниз вправо, наверх, влево, вниз, вправо. и в другую сторону");
-                        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) imageView.getLayoutParams();
-
-
-
 
                         new Handler().postDelayed(() -> animateImageView(imageView, Gravity.BOTTOM | Gravity.RIGHT, upAnimation), 1000);
                         new Handler().postDelayed(() -> animateImageView(imageView, Gravity.TOP | Gravity.RIGHT, leftAnimation), 6000);
                         new Handler().postDelayed(() -> animateImageView(imageView, Gravity.TOP | Gravity.LEFT, downAnimation), 11000);
                         new Handler().postDelayed(() -> animateImageView(imageView, Gravity.BOTTOM | Gravity.LEFT, rightAnimation), 16000);
                         new Handler().postDelayed(() -> imageView.clearAnimation(), 21000);
-
-
 
                 break;
 
@@ -320,6 +289,11 @@ public class Activity_2 extends AppCompatActivity {
         int i = rand.nextInt(2) + 1;
         switch (i) {
             case (1):
+                if (!musicKnot) {
+                    playKnot();
+                } else {
+                    stopKnot();
+                }
                 textView.setText("Рисуем глазами бантики. \n" +
                         "Начиная от правого верхнего угла опускаем глаза вниз, по диагонали поднимем взгляд в верхний левый угол, опускаем и возвращаемся на исходную точку.\n");
                 FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) imageView.getLayoutParams();
@@ -344,32 +318,97 @@ public class Activity_2 extends AppCompatActivity {
     });
 
         number_4.setOnClickListener(new View.OnClickListener(){
-@Override
-public void onClick(View view){
 
-        }
+@Override
+public void onClick(View view) {
+    Random rand = new Random();
+    int i = rand.nextInt(2) + 1;
+    switch (i) {
+        case (1):
+            if (!musicClock) {
+                playClock();
+            } else {
+                stopClock();
+            }
+            textView.setText("Часы. \n" +
+                    "Посмотрите в верхний левый угол, проведите диагональ в правый нижний, " +
+                    "затем посмотрите в левый нижний. Из конечной точки, проведите диагональ в правый " +
+                    "верхний угол. Повторим: верхний левый угол, нижний правый," +
+                    " нижний левый и затем верхний правый угол. В обратную сторону. Верхний левый угол, " +
+                    "затем правый верхний, потом левый нижний, а затем правый нижний и верхний левый угол");
+            new Handler().postDelayed(() -> animateImageView(imageView, Gravity.BOTTOM | Gravity.RIGHT, diagonalAnimationUpRigh), 1000);
+            new Handler().postDelayed(() -> animateImageView(imageView, Gravity.TOP | Gravity.LEFT, rightAnimation), 6000);
+            new Handler().postDelayed(() -> animateImageView(imageView, Gravity.TOP | Gravity.RIGHT, diagonalAnimationRigh), 11000);
+            new Handler().postDelayed(() -> animateImageView(imageView, Gravity.BOTTOM | Gravity.LEFT, rightAnimation), 16000);
+            new Handler().postDelayed(() -> imageView.clearAnimation(), 21000);
+
+            break;
+        case (2):
+            //TODO
+            break;
+        default:
+            break;
+
+    }
+}
         });
     }
 
-    private void playMusic1() {
-        music1Playing = true;
-        mediaPlayer1.start();
+
+    private void playKresting() {
+        musicKresting = true;
+        Krestie.start();
     }
 
-    private void stopMusic1() {
-        music1Playing = false;
-        mediaPlayer1.pause();
-        mediaPlayer1.seekTo(0);
+    private void stopKresting() {
+        musicKresting = false;
+        Krestie.pause();
+        Krestie.seekTo(0);
     }
 
-    private void playMusic2() {
-        music2Playing = true;
-        mediaPlayer2.start();
+    private void playCross() {
+        musicCross = true;
+        Cross.start();
     }
 
-    private void stopMusic2() {
-        music2Playing = false;
-        mediaPlayer2.pause();
-        mediaPlayer2.seekTo(0);
+    private void stopCross() {
+        musicCross = false;
+        Cross.pause();
+        Cross.seekTo(0);
+    }
+    private void playSquare() {
+        musicSquare = true;
+        Square.start();
+    }
+
+    private void stopSquare() {
+        musicSquare = false;
+        Square.pause();
+        Square.seekTo(0);
+    }
+    private void playKnot(){
+        musicKnot = true;
+        Knot.start();
+    }
+    private void stopKnot(){
+        musicKnot = false;
+        Knot.pause();
+        Knot.seekTo(0);
+    }
+    private void playClock(){
+        musicClock = true;
+        Clock.start();
+    }
+    private void stopClock(){
+        musicClock = false;
+        Clock.pause();
+        Clock.seekTo(0);
+    }
+
+    private void animateImageView(ImageView imageView, int gravity, Animation animation) {
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) imageView.getLayoutParams();
+        layoutParams.gravity = gravity;
+        imageView.setLayoutParams(layoutParams);
+        imageView.startAnimation(animation);
     }
 }
